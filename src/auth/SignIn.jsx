@@ -29,7 +29,7 @@ const SignIn = () => {
         navigate("/");
       })
       .catch(() => {
-        toast("Error Occer");
+        toast("Error Occered");
       });
   };
 

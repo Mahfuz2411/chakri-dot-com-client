@@ -4,12 +4,14 @@ import {
 import App from "../App";
 import Error from "../pages/Error"
 import Home from "../pages/Home";
-import SignIn from "../auth-pages/SignIn";
-import SignUp from "../auth-pages/SignUp";
+import SignIn from "../auth/SignIn";
+import SignUp from "../auth/SignUp";
 import AddJobs from "../pages/AddJobs";
 import MyJobs from "../pages/MyJobs";
 import MyBids from "../pages/MyBids";
 import Requests from "../pages/Requests";
+import JobDetails from "../pages/JobDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -31,19 +33,23 @@ const router = createBrowserRouter([
       },
       {
         path:"/addjobs",
-        element: <AddJobs></AddJobs>
+        element: <PrivateRoute><AddJobs></AddJobs></PrivateRoute>
       },
       {
         path: "/myjobs",
-        element: <MyJobs></MyJobs>
+        element: <PrivateRoute><MyJobs></MyJobs></PrivateRoute>
       },
       {
         path: "/mybids",
-        element: <MyBids></MyBids>
+        element: <PrivateRoute><MyBids></MyBids></PrivateRoute>
       },
       {
         path: "/requests",
-        element: <Requests></Requests>
+        element: <PrivateRoute><Requests></Requests></PrivateRoute>
+      },
+      {
+        path: "/jobs/:id",
+        element: <PrivateRoute><JobDetails></JobDetails></PrivateRoute>
       }
     ]
   },
