@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
-const JdetailsForm = ({Props_will_given_leter}) => {
+const JdetailsForm = ({job}) => {
 
-  const job = {
+  job = {
     job_tittle: "Digital", 
     category: "Digital Marketing", 
     email: "funding@gmail.com", 
@@ -131,5 +131,9 @@ const JdetailsForm = ({Props_will_given_leter}) => {
     </div>
   );
 };
+
+JdetailsForm.propTypes = {
+  job: PropTypes.object
+}
 
 export default JdetailsForm;
