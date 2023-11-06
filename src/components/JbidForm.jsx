@@ -1,91 +1,17 @@
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
-import Swal from "sweetalert2";
+import PropTypes from 'prop-types';
 
-const hasDatePassed = (targetDate) => {
-  const currentDate = new Date();
-  const parsedTargetDate = new Date(targetDate);
-  return parsedTargetDate < currentDate;
-}
-
-const AddJobs = () => {
+const JbidForm = ({job}) => {
   const {user} = useContext(AuthContext);
 
-  const handleAddJob = (event) => {
-    event.preventDefault();
-
-    const form = event.target;
-
-    const job_tittle = form.job_tittle.value;
-    const category = form.category.value;
-    const email = form.email.value;
-    const deadline = form.deadline.value;
-    const min_price = form.min_price.value;
-    const max_price = form.max_price.value;
-    const description = form.description.value;
-
-    const newJob = {job_tittle, category, email, deadline, min_price, max_price, description};
-      console.log(newJob);
-
-    if(!job_tittle || !category || !deadline || !min_price || !max_price || !description) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please fill all the fields",
-      });
-    } else if(hasDatePassed(deadline)){
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Deadline has passed",
-      })
-    } else if(min_price > max_price) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Min price cannot be greater than max price",
-      })
-    } else{
-      // Ekhane Database add kora hobe
-    }
-  };
-
+  const handleAddBid = () => {
+    
+  }
   return (
     <div className="bg-[#F4F3F0] md:p-10 lg:p-24">
       <h1 className="text-3xl font-extrabold text-center">ADD A NEW JOB</h1>
-      <form onSubmit={handleAddJob} action="">
-        {/* Form Job Tittle and Category row*/}
-        <div className="md:flex">
-          <div className="form-control w-full p-10">
-            <label className="label">
-              <span className="label-text">Job Tittle</span>
-            </label>
-            <div className="join">
-              <input
-                type="text"
-                name="job_tittle"
-                className="input input-bordered join-item w-full"
-                placeholder="Job Tittle"
-              />
-            </div>
-          </div>
-          <div className="form-control w-full p-10">
-            <label className="label">
-              <span className="label-text">Category</span>
-            </label>
-            <div className="join">
-              <select
-                id="category"
-                name="category"
-                className="input input-bordered join-item w-full"
-              >
-                <option value="Digital Marketing">Digital Marketing</option>
-                <option value="Graphics Design">Graphics Design</option>
-                <option value="Web Development">Web Development</option>
-              </select>
-            </div>
-          </div>
-        </div>
+      <form onSubmit={handleAddBid} action="">
         {/* Form Email and Deadline row*/}
         <div className="md:flex">
           <div className="form-control w-full p-10">
@@ -104,14 +30,14 @@ const AddJobs = () => {
           </div>
           <div className="form-control w-full p-10">
             <label className="label">
-              <span className="label-text">Deadline</span>
+              <span className="label-text">Buyer Email</span>
             </label>
             <div className="join">
               <input
-                type="date"
+                type="email"
                 name="deadline"
                 className="input input-bordered join-item w-full"
-                placeholder="Deadline"
+                defaultValue={job.email}
               />
             </div>
           </div>
@@ -176,4 +102,8 @@ const AddJobs = () => {
   );
 };
 
-export default AddJobs;
+JbidForm.propTypes = {
+  job: PropTypes.object
+}
+
+export default JbidForm;

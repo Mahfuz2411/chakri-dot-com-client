@@ -1,8 +1,12 @@
+import JdetailsForm from "../components/JdetailsForm";
+
 const JobDetails = () => {
+
+  
   return (
-    <div>
-      
-    </div>
+    <>
+      <JdetailsForm></JdetailsForm> {/* will take props */}
+    </>
   );
 };
 
