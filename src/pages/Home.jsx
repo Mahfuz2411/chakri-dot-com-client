@@ -1,8 +1,9 @@
+import Quotes from "../components/quotes/Quotes";
 
 const Home = () => {
   return (
     <div>
-      <h1>Hello from Home</h1>
+      <Quotes></Quotes>
     </div>
   );
 };
