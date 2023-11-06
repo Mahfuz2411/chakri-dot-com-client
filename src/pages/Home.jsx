@@ -1,4 +1,4 @@
-import Quotes from "../components/quotes/Quotes";
+import Quotes from "../components/Quotes";
 
 const Home = () => {
   return (

@@ -20,8 +20,6 @@ const Quotes = () => {
     .then(dta => setQuotes(dta))
   },[]);
 
-
-  
   return (
     <div>
       <Swiper
@@ -38,7 +36,6 @@ const Quotes = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        {/* <SwiperSlide>Slide 1</SwiperSlide> */}
         {quotes.map((res) => {
           return <SwiperSlide key={res.id}>
             <div
