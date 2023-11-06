@@ -2,17 +2,6 @@ import PropTypes from 'prop-types';
 
 const JdetailsForm = ({job}) => {
 
-  job = {
-    job_tittle: "Digital", 
-    category: "Digital Marketing", 
-    email: "funding@gmail.com", 
-    deadline: Date.now(), 
-    min_price: 0,  
-    max_price: 10, 
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, voluptatem."
-  };
-  console.log(job);
-
   return (
     <div className="bg-[#F4F3F0] md:p-10 lg:p-24">
       <h1 className="text-3xl font-extrabold text-center">JOB DETAILS</h1>

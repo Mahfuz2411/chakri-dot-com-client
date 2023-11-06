@@ -10,9 +10,9 @@ const JbidForm = ({job}) => {
   }
   return (
     <div className="bg-[#F4F3F0] md:p-10 lg:p-24">
-      <h1 className="text-3xl font-extrabold text-center">ADD A NEW JOB</h1>
+      <h1 className="text-3xl font-extrabold text-center">Place your Bid</h1>
       <form onSubmit={handleAddBid} action="">
-        {/* Form Email and Deadline row*/}
+        {/* Form Email and Buyer Email row*/}
         <div className="md:flex">
           <div className="form-control w-full p-10">
             <label className="label">
@@ -42,47 +42,31 @@ const JbidForm = ({job}) => {
             </div>
           </div>
         </div>
-        {/* Form Price row*/}
+        {/* Form Price & Deadline row*/}
         <div className="md:flex">
           <div className="form-control w-full p-10">
             <label className="label">
-              <span className="label-text">Minimum Price</span>
+              <span className="label-text">Price</span>
             </label>
             <div className="join">
               <input
                 type="text"
-                name="min_price"
+                name="price"
                 className="input input-bordered join-item w-full"
-                placeholder="Minimum Price"
+                placeholder="Price"
               />
             </div>
           </div>
           <div className="form-control w-full p-10">
             <label className="label">
-              <span className="label-text">Maximum Price</span>
+              <span className="label-text">Deadline</span>
             </label>
             <div className="join">
               <input
-                type="text"
-                name="max_price"
+                type="date"
+                name="deadline"
                 className="input input-bordered join-item w-full"
-                placeholder="Maximum Price"
-              />
-            </div>
-          </div>
-        </div>
-        {/* Form Description row*/}
-        <div className="md:flex">
-          <div className="form-control w-full p-10">
-            <label className="label">
-              <span className="label-text">Description</span>
-            </label>
-            <div className="join">
-              <input
-                type="text"
-                name="description"
-                className="input input-bordered join-item w-full"
-                placeholder="Description"
+                placeholder="Deadline"
               />
             </div>
           </div>
@@ -93,7 +77,7 @@ const JbidForm = ({job}) => {
               type="submit"
               name="Submit"
               className="btn btn-block btn-neutral"
-              value="Add Job"
+              value="Bid on the project"
             />
           </div>
         </div>
