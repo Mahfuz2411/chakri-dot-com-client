@@ -7,8 +7,14 @@ const JbidForm = ({job}) => {
 
   // console.log(user);
 
-  const handleAddBid = () => {
-    
+  const handleAddBid = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+
+    const bid_amount = Number(form.bid_amount.value);
+    const bid_description = form.bid_description.value;
+
   }
   return (
     <div className="bg-[#F4F3F0] md:p-10 lg:p-24">
@@ -68,7 +74,8 @@ const JbidForm = ({job}) => {
                 type="date"
                 name="deadline"
                 className="input input-bordered join-item w-full"
-                placeholder="Deadline"
+                defaultValue={job.deadline}
+                readOnly
               />
             </div>
           </div>

@@ -13,10 +13,10 @@ const JobDetails = () => {
     )
     .then((res) => res.json())
     .then((dta) => setJob(dta));
-  }, []);
+  }, [id]);
   
   return (
-    <>
+    job && <>
       <JdetailsForm job={job}></JdetailsForm>  {/* will take props */}
       <JbidForm job={job}></JbidForm>  {/* will take props */}
     </>
