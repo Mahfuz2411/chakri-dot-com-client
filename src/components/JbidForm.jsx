@@ -78,6 +78,7 @@ const JbidForm = ({job}) => {
               name="Submit"
               className="btn btn-block btn-neutral"
               value="Bid on the project"
+              disabled={user.email === job.email}
             />
           </div>
         </div>

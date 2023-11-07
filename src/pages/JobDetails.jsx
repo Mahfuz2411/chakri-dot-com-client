@@ -12,11 +12,11 @@ const JobDetails = () => {
     max_price: 10, 
     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, voluptatem."
   };
-  console.log(job);
+  // console.log(job);
   
   return (
     <>
-      <JdetailsForm job={job}></JdetailsForm> {/* will take props */}
+      <JdetailsForm job={job}></JdetailsForm>  {/* will take props */}
       <JbidForm job={job}></JbidForm>  {/* will take props */}
     </>
   );
