@@ -19,7 +19,7 @@ const JbidForm = ({ job }) => {
 
     const form = event.target;
 
-    const bid_tittle = job.bid_tittle;
+    const bid_tittle = job.job_tittle;
     const bid_amount = Number(form.price.value);
     const useremail = form.email.value;
     const buyeremail = form.bemail.value;
@@ -50,6 +50,7 @@ const JbidForm = ({ job }) => {
       })
     } else {
       const newBid = {bid_tittle, bid_amount, bid_deadline, job_id, useremail, buyeremail, status};
+      console.log(newBid);
       fetch("http://localhost:5000/bids", {
         method: "POST",
         headers: {
