@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 const JbidForm = ({job}) => {
   const {user} = useContext(AuthContext);
 
+  console.log(user);
+
   const handleAddBid = () => {
     
   }

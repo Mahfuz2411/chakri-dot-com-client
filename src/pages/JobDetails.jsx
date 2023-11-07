@@ -7,7 +7,7 @@ const JobDetails = () => {
     job_tittle: "Digital", 
     category: "Digital Marketing", 
     email: "funding@gmail.com", 
-    deadline: Date.now(), 
+    deadline: "2024-12-30", 
     min_price: 0,  
     max_price: 10, 
     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, voluptatem."

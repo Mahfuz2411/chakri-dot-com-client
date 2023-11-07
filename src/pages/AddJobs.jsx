@@ -24,15 +24,16 @@ const AddJobs = () => {
     const max_price = form.max_price.value;
     const description = form.description.value;
 
-    // const newJob = {job_tittle, category, email, deadline, min_price, max_price, description};
+    const newJob = {job_tittle, category, email, deadline, min_price, max_price, description};
       // console.log(newJob);
+      newJob;
 
     if(!job_tittle || !category || !deadline || !min_price || !max_price || !description) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Please fill all the fields",
-      });
+      })
     } else if(hasDatePassed(deadline)){
       Swal.fire({
         icon: "error",

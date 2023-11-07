@@ -4,6 +4,7 @@ import { AuthContext } from "../contexts/AuthProvider";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
+  // conolse.log()
   const links = (
     <>
       <li>
