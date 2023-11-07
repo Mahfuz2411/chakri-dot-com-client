@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import Swal from "sweetalert2";
+import MyJobCards from "../components/MyJobCards";
 
 
 const MyJobs = () => {
@@ -26,11 +27,15 @@ const MyJobs = () => {
           confirmButtonText: "Ok",
         });
       });
-  }, [user]);
+  }, [user, myJobs]);
   return (
-    <>
-      <h1>{myJobs.length}</h1>
-    </>
+    <div className="container mx-auto py-20 grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {
+        myJobs.map((job) => (
+          <MyJobCards key={job._id} job={job} />
+        ))
+      }
+    </div>
   );
 };
 
