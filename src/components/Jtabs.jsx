@@ -11,7 +11,7 @@ const Jtabs = () => {
 
   useEffect(() => {
     fetch(
-      "https://raw.githubusercontent.com/Mahfuz2411/jsonplaceholder/main/jobs2.json"
+      "http://localhost:5000/jobs"
     )
       .then((res) => res.json())
       .then((dta) => setJobs(dta));
@@ -29,10 +29,10 @@ const Jtabs = () => {
       </TabList>
 
       <TabPanel>
-        <div className="min-h-screen grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="min-h-screen grid md:grid-cols-2 lg:grid-cols-3 grid-rows-3 gap-10">
           {jobs.map((job) => {
             if (job.category === "Digital Marketing") {
-              return <JtabCards key={job.id} job={job}></JtabCards>;
+              return <JtabCards key={job._id} job={job}></JtabCards>;
             }
           })}
         </div>
@@ -41,16 +41,16 @@ const Jtabs = () => {
         <div className="min-h-screen grid md:grid-cols-2 lg:grid-cols-3 grid-rows-3 gap-10">
           {jobs.map((job) => {
             if (job.category === "Web Development") {
-              return <JtabCards key={job.id} job={job}></JtabCards>;
+              return <JtabCards key={job._id} job={job}></JtabCards>;
             }
           })}
         </div>
       </TabPanel>
       <TabPanel>
-        <div className="min-h-screen grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="min-h-screen grid md:grid-cols-2 lg:grid-cols-3 grid-rows-3 gap-10">
           {jobs.map((job) => {
             if (job.category === "Graphics Design") {
-              return <JtabCards key={job.id} job={job}></JtabCards>;
+              return <JtabCards key={job._id} job={job}></JtabCards>;
             }
           })}
         </div>

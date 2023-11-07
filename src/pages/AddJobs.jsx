@@ -20,34 +20,63 @@ const AddJobs = () => {
     const category = form.category.value;
     const email = form.email.value;
     const deadline = form.deadline.value;
-    const min_price = form.min_price.value;
-    const max_price = form.max_price.value;
+    const min_price = Number(form.min_price.value);
+    const max_price = Number(form.max_price.value);
     const description = form.description.value;
-
-    const newJob = {job_tittle, category, email, deadline, min_price, max_price, description};
-      // console.log(newJob);
-      newJob;
+    
+    
 
     if(!job_tittle || !category || !deadline || !min_price || !max_price || !description) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Please fill all the fields",
+        confirmButtonText: "Ok",
       })
     } else if(hasDatePassed(deadline)){
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Deadline has passed",
+        confirmButtonText: "Ok",
       })
     } else if(min_price > max_price) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Min price cannot be greater than max price",
-      })
+        confirmButtonText: "Ok",
+      });
     } else{
-      // Ekhane Database add kora hobe
+      const newJob = {job_tittle, category, email, deadline, min_price, max_price, description};
+      fetch("http://localhost:5000/jobs", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(newJob),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data);
+          if (data.insertedId) {
+            form.reset();
+            return Swal.fire({
+              title: "Succes",
+              text: "Job added succesfully",
+              icon: "success",
+              confirmButtonText: "Ok",
+            });
+          }
+        })
+        .catch(() => {
+          return Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong",
+            confirmButtonText: "Ok",
+          });
+        });
     }
   };
 
@@ -125,7 +154,7 @@ const AddJobs = () => {
             </label>
             <div className="join">
               <input
-                type="text"
+                type="number"
                 name="min_price"
                 className="input input-bordered join-item w-full"
                 placeholder="Minimum Price"
@@ -138,7 +167,7 @@ const AddJobs = () => {
             </label>
             <div className="join">
               <input
-                type="text"
+                type="number"
                 name="max_price"
                 className="input input-bordered join-item w-full"
                 placeholder="Maximum Price"

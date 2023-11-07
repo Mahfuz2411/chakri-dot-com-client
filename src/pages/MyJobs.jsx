@@ -2,9 +2,9 @@
 
 const MyJobs = () => {
   return (
-    <div>
+    <>
       
-    </div>
+    </>
   );
 };
 
