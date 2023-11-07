@@ -39,7 +39,7 @@ const AddJobs = () => {
         title: "Oops...",
         text: "Deadline has passed",
         confirmButtonText: "Ok",
-      })
+      });
     } else if(min_price > max_price) {
       Swal.fire({
         icon: "error",
