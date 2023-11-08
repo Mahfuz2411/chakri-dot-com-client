@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Ccards from "./Ccards";
 import { AuthContext } from "../contexts/AuthProvider";
 import Swal from "sweetalert2";
+import { LoaderContext } from "../contexts/LoaderProvider";
 
 const findCurrDate = () => {
   const today = new Date();
@@ -20,17 +21,26 @@ const findCurrDate = () => {
 const Comments = () => {
   const [comments, setComments] = useState([]);
   const { user } = useContext(AuthContext);
+  const { isLoadingData, setIsLoadingData } = useContext(LoaderContext);
 
   useEffect(() => {
     fetch("http://localhost:5000/comment")
       .then((res) => res.json())
-      .then((data) => setComments(data));
-  }, [user, comments]);
+      .then((data) => {
+        setComments(data);
+        setIsLoadingData((prev) => false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoadingData(false);
+      });
+  }, [user, comments, isLoadingData]);
 
   const handleComment = (event) => {
     event.preventDefault();
     const newComment = {
       name: user.displayName,
+      image: user.photoURL,
       comment: event.target.comment.value,
       date: findCurrDate(),
     };
@@ -73,21 +83,8 @@ const Comments = () => {
   };
 
   return (
-    <div className="container mx-auto w-full flex justify-center items-center py-20">
-      <form className="join mx-auto pb-10">
-        <input
-          name="comment"
-          className="input input-bordered join-item"
-          placeholder="Email"
-        />
-        <input
-          type="submit"
-          onClick={handleComment}
-          className="btn join-item rounded-rl"
-          value={"Comment"}
-        />
-      </form>
-      {!!comments.length && (
+    <div className="container mx-auto w-full flex flex-col justify-center items-center py-20">
+      {!isLoadingData && !!comments.length && (
         <div className="container mx-auto py-10 px-5 flex flex-col gap-6">
           <h2 className="text-center font-bold text-4xl">
             Out Client&apos;s Comments
@@ -95,12 +92,24 @@ const Comments = () => {
           <Marquee>
             <div className="flex justify-center items-center">
               {comments.map((data) => (
-                <Ccards key={data.id} data={data}></Ccards>
+                <Ccards key={data._id} data={data}></Ccards>
               ))}
             </div>
           </Marquee>
         </div>
       )}
+      <form onSubmit={handleComment} className="join mx-auto pb-10">
+        <input
+          name="comment"
+          className="input input-bordered join-item"
+          placeholder="Email"
+        />
+        <input
+          type="submit"
+          className="btn join-item rounded-rl"
+          value={"Comment"}
+        />
+      </form>
     </div>
   );
 };

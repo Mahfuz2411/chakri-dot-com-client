@@ -1,20 +1,25 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import JtabCards from "./JtabCards";
-
+import { LoaderContext } from "../contexts/LoaderProvider";
 
 const Jtabs = () => {
   const [jobs, setJobs] = useState([]);
-  
+  const { isLoadingData, setIsLoadingData } = useContext(LoaderContext);
 
   useEffect(() => {
-    fetch(
-      "http://localhost:5000/jobs"
-    )
+    fetch("http://localhost:5000/jobs")
       .then((res) => res.json())
-      .then((dta) => setJobs(dta));
+      .then((dta) => {
+        setJobs(dta);
+        setIsLoadingData((prev) => false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoadingData((prev) => false);
+      });
   }, []);
 
   // console.log(jobs);

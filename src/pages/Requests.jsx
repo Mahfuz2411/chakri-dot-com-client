@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import Swal from "sweetalert2";
+import { LoaderContext } from "../contexts/LoaderProvider";
 
 const Requests = () => {
   const [req, setReq] = useState([]);
   const { user } = useContext(AuthContext);
-
+  const { isLoadingData, setIsLoadingData } = useContext(LoaderContext);
   useEffect(() => {
     fetch(`http://localhost:5000/requests/${user.email}`, {
       method: "GET",
@@ -16,8 +17,10 @@ const Requests = () => {
       .then((res) => res.json())
       .then((data) => {
         setReq(data);
+        setIsLoadingData((prev) => false);
       })
       .catch(() => {
+        setIsLoadingData((prev) => false);
         return Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -25,9 +28,7 @@ const Requests = () => {
           confirmButtonText: "Ok",
         });
       });
-  }, [user, req]);
-
-
+  }, [user, req, isLoadingData]);
 
   const handleClick = (id, text) => {
     fetch(`http://localhost:5000/bids/${id}`, {
@@ -86,7 +87,18 @@ const Requests = () => {
               {req.map((bid) => {
                 count += 1;
                 return (
-                  <tr className={bid.status==="completed"?"bg-green-100":bid.status==="in progress"?"bg-orange-100":bid.status==="canceled"?"bg-red-100":"bg-slate-100"} key={bid._id}>
+                  <tr
+                    className={
+                      bid.status === "completed"
+                        ? "bg-green-100"
+                        : bid.status === "in progress"
+                        ? "bg-orange-100"
+                        : bid.status === "canceled"
+                        ? "bg-red-100"
+                        : "bg-slate-100"
+                    }
+                    key={bid._id}
+                  >
                     <td>{count}</td>
                     <th>{bid.bid_tittle}</th>
                     <td>{bid.useremail}</td>

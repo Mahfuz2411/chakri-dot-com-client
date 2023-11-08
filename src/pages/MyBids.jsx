@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import Swal from "sweetalert2";
+import { LoaderContext } from "../contexts/LoaderProvider";
 
 const MyBids = () => {
   const [myBids, setMyBids] = useState([]);
   const { user } = useContext(AuthContext);
-
+  const { isLoadingData, setIsLoadingData } = useContext(LoaderContext);
   useEffect(() => {
     fetch(`http://localhost:5000/mybids/${user.email}`, {
       method: "GET",
@@ -16,8 +17,10 @@ const MyBids = () => {
       .then((res) => res.json())
       .then((data) => {
         setMyBids(data);
+        setIsLoadingData((prev) => false);
       })
       .catch(() => {
+        setIsLoadingData((prev) => false);
         return Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -25,8 +28,7 @@ const MyBids = () => {
           confirmButtonText: "Ok",
         });
       });
-  }, [user, myBids]);
-
+  }, [user, myBids, isLoadingData]);
 
   const handleComplete = (id) => {
     fetch(`http://localhost:5000/bids/${id}`, {
@@ -63,7 +65,7 @@ const MyBids = () => {
           confirmButtonText: "Ok",
         });
       });
-  }
+  };
 
   let count = 0;
   return (
@@ -83,16 +85,33 @@ const MyBids = () => {
           {myBids.map((bid) => {
             count += 1;
             return (
-              <tr className={bid.status==="completed"?"bg-green-100":bid.status==="canceled"?"bg-red-100":"bg-slate-100"} key={bid._id}>
+              <tr
+                className={
+                  bid.status === "completed"
+                    ? "bg-green-100"
+                    : bid.status === "canceled"
+                    ? "bg-red-100"
+                    : "bg-slate-100"
+                }
+                key={bid._id}
+              >
                 <td>{count}</td>
                 <th>{bid.bid_tittle}</th>
                 <td>{bid.buyeremail}</td>
                 <td>{bid.bid_deadline}</td>
                 <td>{bid.status}</td>
-                <td>{bid.status==='in progress'?
-                  <button className="btn btn-success" onClick={() => handleComplete(bid._id)}>Complete</button>:
-                  <></>
-                }</td>
+                <td>
+                  {bid.status === "in progress" ? (
+                    <button
+                      className="btn btn-success"
+                      onClick={() => handleComplete(bid._id)}
+                    >
+                      Complete
+                    </button>
+                  ) : (
+                    <></>
+                  )}
+                </td>
               </tr>
             );
           })}

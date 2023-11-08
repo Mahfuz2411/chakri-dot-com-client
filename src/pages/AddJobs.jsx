@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import Swal from "sweetalert2";
+import { LoaderContext } from "../contexts/LoaderProvider";
 
 const hasDatePassed = (targetDate) => {
   const currentDate = new Date();
@@ -9,9 +10,12 @@ const hasDatePassed = (targetDate) => {
 }
 
 const AddJobs = () => {
+  const { isLoadingData, setIsLoadingData } = useContext(LoaderContext);
   const {user} = useContext(AuthContext);
 
+  setIsLoadingData(false);
   const handleAddJob = (event) => {
+
     event.preventDefault();
 
     const form = event.target;
@@ -70,6 +74,7 @@ const AddJobs = () => {
           }
         })
         .catch(() => {
+          
           Swal.fire({
             icon: "error",
             title: "Oops...",

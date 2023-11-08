@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,17 +8,26 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { LoaderContext } from "../contexts/LoaderProvider";
 
 const Quotes = () => {
   const [quotes, setQuotes] = useState([]);
+  const { isLoadingData, setIsLoadingData } = useContext(LoaderContext);
 
   useEffect(() => {
     fetch(
       "https://raw.githubusercontent.com/Mahfuz2411/jsonplaceholder/main/quotes.json"
     )
       .then((res) => res.json())
-      .then((dta) => setQuotes(dta));
-  }, []);
+      .then((dta) => {
+        setQuotes(dta);
+        setIsLoadingData((prev) => false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoadingData((prev) => false);
+      });
+  }, [isLoadingData]);
 
   return (
     <div>
@@ -54,7 +63,9 @@ const Quotes = () => {
                   </p>
                   <h2 className="text-xl md:text-3xl lg:text-5xl font-bold">
                     ~ {res.author}
-                    <div className={`badge badge-accent badge-outline text-xs `}>
+                    <div
+                      className={`badge badge-accent badge-outline text-xs `}
+                    >
                       {res.category}
                     </div>
                   </h2>
