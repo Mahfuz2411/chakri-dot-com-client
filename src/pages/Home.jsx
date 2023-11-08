@@ -9,7 +9,7 @@ import Quotes from "../components/Quotes";
 const Home = () => {
   return (
     <div>
-      <HelmetCompo key={"Home"}></HelmetCompo>
+      <HelmetCompo helmet={"Home"}></HelmetCompo>
       <Quotes></Quotes>
       <Jtabs></Jtabs>
       <About></About>

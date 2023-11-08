@@ -24,7 +24,7 @@ const JobDetails = () => {
   }, [id, isLoadingData]);
 
   return (<>
-  <HelmetCompo key={"Job Details"}></HelmetCompo>
+  <HelmetCompo helmet={"Job Details"}></HelmetCompo>
   {!isLoadingData &&
   job && (
     <>
