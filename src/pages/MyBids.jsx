@@ -83,7 +83,7 @@ const MyBids = () => {
           {myBids.map((bid) => {
             count += 1;
             return (
-              <tr className={bid.status==="completed"?"bg-green-100":"bg-slate-100"} key={bid._id}>
+              <tr className={bid.status==="completed"?"bg-green-100":bid.status==="canceled"?"bg-red-100":"bg-slate-100"} key={bid._id}>
                 <td>{count}</td>
                 <th>{bid.bid_tittle}</th>
                 <td>{bid.buyeremail}</td>
