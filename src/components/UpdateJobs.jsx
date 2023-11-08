@@ -63,18 +63,25 @@ const UpdateJobs = () => {
         .then((res) => res.json())
         .then((data) => {
           // console.log(data);
-          if (data.insertedId) {
+          if (data.modifiedCount) {
             form.reset();
-            Swal.fire({
+            return Swal.fire({
               title: "Succes",
-              text: "Job added succesfully",
+              text: "Job Updated succesfully",
               icon: "success",
+              confirmButtonText: "Ok",
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong",
               confirmButtonText: "Ok",
             });
           }
         })
         .catch(() => {
-          return Swal.fire({
+          Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Something went wrong",
@@ -202,7 +209,7 @@ const UpdateJobs = () => {
               type="submit"
               name="Submit"
               className="btn btn-block btn-neutral"
-              value="Add Job"
+              value="Update Job"
             />
           </div>
         </div>
