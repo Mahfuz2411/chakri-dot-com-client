@@ -61,7 +61,7 @@ const AddJobs = () => {
           // console.log(data);
           if (data.insertedId) {
             form.reset();
-            return Swal.fire({
+            Swal.fire({
               title: "Succes",
               text: "Job added succesfully",
               icon: "success",
@@ -70,7 +70,7 @@ const AddJobs = () => {
           }
         })
         .catch(() => {
-          return Swal.fire({
+          Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Something went wrong",

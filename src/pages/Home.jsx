@@ -9,7 +9,7 @@ const Home = () => {
       <Quotes></Quotes>
       <Jtabs></Jtabs>
       <About></About>
-      {/* <Comments></Comments> */}
+      <Comments></Comments>
     </div>
   );
 };

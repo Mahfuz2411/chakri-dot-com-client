@@ -3,13 +3,14 @@ import { useContext, useState } from "react";
 import { useEffect } from "react";
 import Ccards from "./Ccards";
 import { AuthContext } from "../contexts/AuthProvider";
+import Swal from "sweetalert2";
 
 const findCurrDate = () => {
   const today = new Date();
 
   const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, "0"); 
-  const day = String(today.getDate()).padStart(2, "0"); 
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
 
   const currentDate = `${year}-${month}-${day}`;
 
@@ -17,17 +18,14 @@ const findCurrDate = () => {
 };
 
 const Comments = () => {
-  const [client, setClient] = useState([]);
-  const {user} = useContext(AuthContext);
+  const [comments, setComments] = useState([]);
+  const { user } = useContext(AuthContext);
 
-  console.log(user);
   useEffect(() => {
-    fetch(
-      "http://localhost:5000/comment"
-    )
+    fetch("http://localhost:5000/comment")
       .then((res) => res.json())
-      .then((data) => setClient(data));
-  });
+      .then((data) => setComments(data));
+  }, [user, comments]);
 
   const handleComment = (event) => {
     event.preventDefault();
@@ -36,11 +34,47 @@ const Comments = () => {
       comment: event.target.comment.value,
       date: findCurrDate(),
     };
+
+    fetch("http://localhost:5000/comment", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newComment),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.insertedId) {
+          event.target.reset();
+          Swal.fire({
+            title: "Succes",
+            text: "Comment added succesfully",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong",
+            confirmButtonText: "Ok",
+          });
+        }
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong",
+          confirmButtonText: "Ok",
+        });
+      });
   };
 
   return (
-    <div className="container mx-auto">
-      <form className="join w-full ">
+    <div className="container mx-auto w-full flex justify-center items-center py-20">
+      <form className="join mx-auto pb-10">
         <input
           name="comment"
           className="input input-bordered join-item"
@@ -53,17 +87,20 @@ const Comments = () => {
           value={"Comment"}
         />
       </form>
-      <div className="container mx-auto py-10 px-5 flex flex-col gap-6">
-        <h2 className="text-center font-bold text-4xl">
-          Out Client&apos;s Comment
-        </h2>
-        <Marquee>
-          <div className="flex justify-center items-center">
-            {client &&
-              client.map((data) => <Ccards key={data.id} data={data}></Ccards>)}
-          </div>
-        </Marquee>
-      </div>
+      {!!comments.length && (
+        <div className="container mx-auto py-10 px-5 flex flex-col gap-6">
+          <h2 className="text-center font-bold text-4xl">
+            Out Client&apos;s Comments
+          </h2>
+          <Marquee>
+            <div className="flex justify-center items-center">
+              {comments.map((data) => (
+                <Ccards key={data.id} data={data}></Ccards>
+              ))}
+            </div>
+          </Marquee>
+        </div>
+      )}
     </div>
   );
 };
