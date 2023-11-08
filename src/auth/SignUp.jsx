@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useState, useContext } from "react";
 import auth from "../firebase/firebase.config";
 import { AuthContext } from "../contexts/AuthProvider";
+import HelmetCompo from "../components/HelmetCompo";
 
 const SignUp = () => {
   const [user, setUser] = useState({
@@ -89,6 +90,7 @@ const SignUp = () => {
 
   return (
     <>
+    <HelmetCompo helmet={"Register"}></HelmetCompo>
       <div className="w-full max-w-sm lg:max-w-3xl mx-auto hero min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="w-full px-5 text-center lg:text-left">

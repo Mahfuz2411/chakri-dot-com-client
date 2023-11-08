@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
+import HelmetCompo from "../components/HelmetCompo";
 
 const SignIn = () => {
   const [user, setUser] = useState({
@@ -43,6 +44,8 @@ const SignIn = () => {
   };
 
   return (
+    <>
+    <HelmetCompo helmet={"Login"}></HelmetCompo>
     <div className="w-full max-w-sm lg:max-w-3xl mx-auto hero min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="w-full px-5 text-center lg:text-left">
@@ -96,6 +99,7 @@ const SignIn = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
