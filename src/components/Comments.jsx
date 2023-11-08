@@ -98,11 +98,13 @@ const Comments = () => {
           </Marquee>
         </div>
       )}
+      <div>
+        <h2 className="text-xl md:text-3xl text-center w-full pb-10 font-bold">Comment Here!</h2>
       <form onSubmit={handleComment} className="join mx-auto pb-10">
         <input
           name="comment"
-          className="input input-bordered join-item"
-          placeholder="Email"
+          className="input input-bordered join-item w-full"
+          placeholder="Comment"
         />
         <input
           type="submit"
@@ -110,6 +112,7 @@ const Comments = () => {
           value={"Comment"}
         />
       </form>
+      </div>
     </div>
   );
 };
