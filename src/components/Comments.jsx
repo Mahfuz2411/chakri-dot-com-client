@@ -24,7 +24,7 @@ const Comments = () => {
   const { isLoadingData, setIsLoadingData } = useContext(LoaderContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/comment")
+    fetch("https://chakri-dot-com-server.vercel.app/comment")
       .then((res) => res.json())
       .then((data) => {
         setComments(data);
@@ -45,7 +45,7 @@ const Comments = () => {
       date: findCurrDate(),
     };
 
-    fetch("http://localhost:5000/comment", {
+    fetch("https://chakri-dot-com-server.vercel.app/comment", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -54,7 +54,7 @@ const UpdateJobs = () => {
       });
     } else{
       const newJob = {job_tittle, category, email, deadline, min_price, max_price, description};
-      fetch(`http://localhost:5000/jobs/${job._id}`, {
+      fetch(`https://chakri-dot-com-server.vercel.app/jobs/${job._id}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",

@@ -10,7 +10,7 @@ const Jtabs = () => {
   const { isLoadingData, setIsLoadingData } = useContext(LoaderContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/jobs")
+    fetch("https://chakri-dot-com-server.vercel.app/jobs")
       .then((res) => res.json())
       .then((dta) => {
         setJobs(dta);

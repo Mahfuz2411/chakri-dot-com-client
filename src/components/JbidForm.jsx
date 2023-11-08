@@ -51,7 +51,7 @@ const JbidForm = ({ job }) => {
     } else {
       const newBid = {bid_tittle, bid_amount, bid_deadline, job_id, useremail, buyeremail, status};
       console.log(newBid);
-      fetch("http://localhost:5000/bids", {
+      fetch("https://chakri-dot-com-server.vercel.app/bids", {
         method: "POST",
         headers: {
           "content-type": "application/json",

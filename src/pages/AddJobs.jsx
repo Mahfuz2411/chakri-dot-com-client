@@ -66,7 +66,7 @@ const AddJobs = () => {
         max_price,
         description,
       };
-      fetch("http://localhost:5000/jobs", {
+      fetch("https://chakri-dot-com-server.vercel.app/jobs", {
         method: "POST",
         headers: {
           "content-type": "application/json",

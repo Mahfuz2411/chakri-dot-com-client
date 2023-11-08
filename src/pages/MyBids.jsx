@@ -9,7 +9,7 @@ const MyBids = () => {
   const { user } = useContext(AuthContext);
   const { isLoadingData, setIsLoadingData } = useContext(LoaderContext);
   useEffect(() => {
-    fetch(`http://localhost:5000/mybids/${user.email}`, {
+    fetch(`https://chakri-dot-com-server.vercel.app/mybids/${user.email}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -32,7 +32,7 @@ const MyBids = () => {
   }, [user, myBids, isLoadingData]);
 
   const handleComplete = (id) => {
-    fetch(`http://localhost:5000/bids/${id}`, {
+    fetch(`https://chakri-dot-com-server.vercel.app/bids/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

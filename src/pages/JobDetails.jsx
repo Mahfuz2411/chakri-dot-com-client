@@ -11,7 +11,7 @@ const JobDetails = () => {
   const { isLoadingData, setIsLoadingData } = useContext(LoaderContext);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/jobs/${id}`)
+    fetch(`https://chakri-dot-com-server.vercel.app/jobs/${id}`)
       .then((res) => res.json())
       .then((dta) => {
         setJob(dta);

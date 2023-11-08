@@ -11,7 +11,7 @@ const MyJobs = () => {
   const { isLoadingData, setIsLoadingData } = useContext(LoaderContext);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myjobs/${user.email}`, {
+    fetch(`https://chakri-dot-com-server.vercel.app/myjobs/${user.email}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

@@ -25,7 +25,7 @@ const MyJobCards = ({job}) => {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/jobs/${job._id}`, {
+        fetch(`https://chakri-dot-com-server.vercel.app/jobs/${job._id}`, {
           method: "DELETE",
           headers: {
             "content-type": "application/json",
