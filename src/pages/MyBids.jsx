@@ -25,11 +25,44 @@ const MyBids = () => {
           confirmButtonText: "Ok",
         });
       });
-  }, [user]);
+  }, [user, myBids]);
 
 
-  const handleComplete = () => {
-    // ==========================================================>
+  const handleComplete = (id) => {
+    fetch(`http://localhost:5000/bids/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ status: "completed" }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.modifiedCount) {
+          Swal.fire({
+            title: "Succes",
+            text: "Succesfull",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong",
+            confirmButtonText: "Ok",
+          });
+        }
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong",
+          confirmButtonText: "Ok",
+        });
+      });
   }
 
   let count = 0;
@@ -50,14 +83,14 @@ const MyBids = () => {
           {myBids.map((bid) => {
             count += 1;
             return (
-              <tr key={bid._id}>
+              <tr className={bid.status==="completed"?"bg-green-100":"bg-slate-100"} key={bid._id}>
                 <td>{count}</td>
                 <th>{bid.bid_tittle}</th>
                 <td>{bid.buyeremail}</td>
                 <td>{bid.bid_deadline}</td>
                 <td>{bid.status}</td>
                 <td>{bid.status==='in progress'?
-                  <button onClick={handleComplete}>Complete</button>:
+                  <button className="btn btn-success" onClick={() => handleComplete(bid._id)}>Complete</button>:
                   <></>
                 }</td>
               </tr>
