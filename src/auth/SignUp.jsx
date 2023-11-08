@@ -10,8 +10,11 @@ import { useState, useContext } from "react";
 import auth from "../firebase/firebase.config";
 import { AuthContext } from "../contexts/AuthProvider";
 import HelmetCompo from "../components/HelmetCompo";
+import { LoaderContext } from "../contexts/LoaderProvider";
 
 const SignUp = () => {
+  const { setIsLoadingData } = useContext(LoaderContext);
+  setIsLoadingData(false);
   const [user, setUser] = useState({
     fullName: "",
     imgLink: "",

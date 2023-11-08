@@ -5,8 +5,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import HelmetCompo from "../components/HelmetCompo";
+import { LoaderContext } from "../contexts/LoaderProvider";
 
 const SignIn = () => {
+  const { setIsLoadingData } = useContext(LoaderContext);
+  setIsLoadingData(false);
   const [user, setUser] = useState({
     email: "",
     password: "",

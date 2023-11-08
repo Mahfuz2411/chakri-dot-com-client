@@ -41,13 +41,6 @@ const JbidForm = ({ job }) => {
         text: "Bid amount must be between min and max price",
         confirmButtonText: "Ok",
       });
-    } else if(hasDatePassed(bid_deadline)) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Deadline has passed",
-        confirmButtonText: "Ok",
-      })
     } else {
       const newBid = {bid_tittle, bid_amount, bid_deadline, job_id, useremail, buyeremail, status};
       console.log(newBid);
@@ -152,7 +145,7 @@ const JbidForm = ({ job }) => {
               name="Submit"
               className="btn btn-block btn-neutral"
               value="Bid on the project"
-              disabled={user.email === job.email}
+              disabled={user.email === job.email || hasDatePassed(job.deadline)}
             />
           </div>
         </div>
