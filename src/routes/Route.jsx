@@ -55,7 +55,6 @@ const router = createBrowserRouter([
       {
         path: "/update/:id",
         element: <PrivateRoute><UpdateJobs></UpdateJobs></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
       }
     ]
   },

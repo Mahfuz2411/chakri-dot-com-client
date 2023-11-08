@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import Swal from "sweetalert2";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const hasDatePassed = (targetDate) => {
   const currentDate = new Date();
@@ -12,8 +12,9 @@ const hasDatePassed = (targetDate) => {
 const UpdateJobs = () => {
   const {user} = useContext(AuthContext);
   const job = useLoaderData();
+  const navigate = useNavigate();
 
-  console.log(job);
+  // console.log(job);
 
   const handleUpdateJob = (event) => {
     event.preventDefault();
@@ -65,12 +66,13 @@ const UpdateJobs = () => {
           // console.log(data);
           if (data.modifiedCount) {
             form.reset();
-            return Swal.fire({
+            Swal.fire({
               title: "Succes",
               text: "Job Updated succesfully",
               icon: "success",
               confirmButtonText: "Ok",
             });
+            navigate("/myjobs");
           } else {
             Swal.fire({
               icon: "error",

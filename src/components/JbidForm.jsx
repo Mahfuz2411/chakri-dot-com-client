@@ -139,6 +139,8 @@ const JbidForm = ({ job }) => {
                 type="date"
                 name="deadline"
                 className="input input-bordered join-item w-full"
+                defaultValue={job.deadline}
+                readOnly
               />
             </div>
           </div>

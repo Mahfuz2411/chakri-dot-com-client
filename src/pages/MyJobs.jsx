@@ -29,7 +29,7 @@ const MyJobs = () => {
       });
   }, [user, myJobs]);
   return (
-    <div className="container mx-auto py-20 grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div className="container mx-auto px-10 py-20 grid md:grid-cols-2 lg:grid-cols-3 gap-10">
       {
         myJobs.map((job) => (
           <MyJobCards key={job._id} job={job} />
