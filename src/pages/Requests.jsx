@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import Swal from "sweetalert2";
 import { LoaderContext } from "../contexts/LoaderProvider";
+import HelmetCompo from "../components/HelmetCompo";
 
 const Requests = () => {
   const [req, setReq] = useState([]);
@@ -68,7 +69,9 @@ const Requests = () => {
 
   let count = 0;
   return (
-    req && (
+    <>
+      <HelmetCompo helmet={"Bid Requests"}></HelmetCompo>
+      {req && (
       <div>
         <div className="container mx-auto overflow-x-auto">
           <table className="table table-xs">
@@ -143,7 +146,8 @@ const Requests = () => {
           </table>
         </div>
       </div>
-    )
+    )}
+    </>
   );
 };
 

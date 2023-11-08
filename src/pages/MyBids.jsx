@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import Swal from "sweetalert2";
 import { LoaderContext } from "../contexts/LoaderProvider";
+import HelmetCompo from "../components/HelmetCompo";
 
 const MyBids = () => {
   const [myBids, setMyBids] = useState([]);
@@ -69,7 +70,9 @@ const MyBids = () => {
 
   let count = 0;
   return (
-    <div className="container mx-auto overflow-x-auto">
+    <>
+      <HelmetCompo helmet={"My Bids"}></HelmetCompo>
+      <div className="container mx-auto overflow-x-auto">
       <table className="table table-xs">
         <thead>
           <tr>
@@ -128,6 +131,7 @@ const MyBids = () => {
         </tfoot>
       </table>
     </div>
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ import JdetailsForm from "../components/JdetailsForm";
 import JbidForm from "../components/jbidForm";
 import { useContext, useEffect, useState } from "react";
 import { LoaderContext } from "../contexts/LoaderProvider";
+import HelmetCompo from "../components/HelmetCompo";
 
 const JobDetails = () => {
   let { id } = useParams();
@@ -22,14 +23,16 @@ const JobDetails = () => {
       });
   }, [id, isLoadingData]);
 
-  return (
-    !isLoadingData &&
-    job && (
-      <>
-        <JdetailsForm job={job}></JdetailsForm>
-        <JbidForm job={job}></JbidForm>
-      </>
-    )
+  return (<>
+  <HelmetCompo key={"Job Details"}></HelmetCompo>
+  {!isLoadingData &&
+  job && (
+    <>
+      <JdetailsForm job={job}></JdetailsForm>
+      <JbidForm job={job}></JbidForm>
+    </>
+  )}
+  </>
   );
 };
 

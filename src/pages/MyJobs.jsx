@@ -3,6 +3,7 @@ import { AuthContext } from "../contexts/AuthProvider";
 import Swal from "sweetalert2";
 import MyJobCards from "../components/MyJobCards";
 import { LoaderContext } from "../contexts/LoaderProvider";
+import HelmetCompo from "../components/HelmetCompo";
 
 const MyJobs = () => {
   const [myJobs, setMyJobs] = useState([]);
@@ -32,11 +33,14 @@ const MyJobs = () => {
       });
   }, [user, myJobs, isLoadingData]);
   return (
-    <div className="container mx-auto px-10 py-20 grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-      {myJobs.map((job) => (
-        <MyJobCards key={job._id} job={job} />
-      ))}
-    </div>
+    <>
+      <HelmetCompo helmet={"My Job"}></HelmetCompo>
+      <div className="container mx-auto px-10 py-20 grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {myJobs.map((job) => (
+          <MyJobCards key={job._id} job={job} />
+        ))}
+      </div>
+    </>
   );
 };
 
