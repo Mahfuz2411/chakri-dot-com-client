@@ -5,5 +5,13 @@
 ### - Job Owner can except or reject Bids
 ### - User can see his added jobs and bids history
 
+<br/>
+<br/>
+
+# Bonus
+### - Loader added
+### - Comment feature added
+
+
 
 
