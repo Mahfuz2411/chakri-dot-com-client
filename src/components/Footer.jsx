@@ -3,7 +3,7 @@ const Footer = () => {
     <div className="bg-neutral">
       <footer className="footer footer-center p-10 bg-neutral text-primary-content">
         <aside>
-          <img className="w-10" src="../../public/favicon_io/android-chrome-512x512.png" alt="" />
+          <img className="w-10" src="https://i.ibb.co/fMrmF88/android-chrome-512x512.png" alt="" />
           <p className="font-bold">
             Charkri Dot Com <br />
             Providing reliable tech since 2023
