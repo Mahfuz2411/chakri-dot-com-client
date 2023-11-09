@@ -108,7 +108,7 @@ const Comments = () => {
         />
         <input
           type="submit"
-          className="btn join-item rounded-rl"
+          className="btn join-item btn-neutral rounded-rl"
           value={"Comment"}
         />
       </form>
